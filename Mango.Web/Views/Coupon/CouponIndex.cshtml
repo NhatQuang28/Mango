@@ -1,0 +1,110 @@
+﻿@model IEnumerable<CouponDto>
+<div class="card shadow border-0 mt-4">
+	<div class="card-header bg-secondary bg-gradient ml-0 py-3">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h1 class="text-white">Coupons List</h1>
+			</div>
+		</div>
+	</div>
+	<div class="card-body p-4">
+		<div class="row pb-3">
+			<div class="col-6">
+			</div>
+			<div class="col-6 text-end">
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-outline-primary" id="createCouponBtn" data-toggle="modal" data-target="#createCouponModal">
+					<i class="bi bi-plus-square"></i> Create New Coupon
+				</button>
+			</div>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>
+						Coupon Code
+					</th>
+					<th>
+						Discount Amount
+					</th>
+					<th>
+						Minimum Amount
+					</th>
+					<th>
+						Last Update
+					</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach(var coupon in Model)
+				{
+					<tr>
+						<td>
+							@coupon.CouponCode
+						</td>
+						<td>
+							@((coupon.DiscountAmount).ToString("c"))
+						</td>
+						<td>
+							@((coupon.MinAmount).ToString("c"))
+						</td>
+						<td>
+							@((coupon.LastUpdated).ToString("dd/mm/yyyy"))
+						</td>
+						<td>
+							<a class="btn btn-danger">
+								<i class="bi bi-trash"></i>
+							</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div id="modalContainer">
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('#createCouponBtn').click(function () {
+			$.ajax({
+				url: '/Coupon/CreateCoupon',
+				type: 'GET',
+				success: function (data) {
+					// Thêm modal vào trang
+					$('#modalContainer').append(data);
+					// Mở modal
+					$('#createCouponModal').modal('show');
+				},
+				error: function (xhr, status, error) {
+					// Xử lý lỗi nếu có
+					console.error(xhr.responseText);
+				}
+			});
+		});
+
+		$('#formCreateCoupon').submit(function (e) {
+			var formData = $(this).serialize();
+
+			$.post('/Coupon/CreateCoupon', formData)
+				.done(function () {
+					$('#createCouponModal').modal('hide');
+					// Hiển thị thông báo thành công
+					$('#couponMessage').removeClass('alert-danger').addClass('alert-success').text('Coupon created successfully.').show();
+				})
+				.fail(function (xhr) {
+					// Xử lý lỗi và hiển thị thông báo
+					$('#couponMessage').removeClass('alert-success').addClass('alert-danger').text(xhr.responseText).show();
+				});
+		});
+	});
+</script>
+
+<!-- validation -->
+@section Scripts {
+	<partial name="_ValidationScriptsPartial.cshtml">
+}
+

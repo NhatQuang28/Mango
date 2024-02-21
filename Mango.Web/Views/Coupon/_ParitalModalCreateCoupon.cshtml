@@ -1,0 +1,48 @@
+﻿@model CouponDto
+
+<!-- Modal -->
+	<div class="modal fade" id="createCouponModal" tabindex="-1" aria-labelledby="createCouponModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-centered">
+			<div class="modal-content">
+			@using (Html.BeginForm("AddDiseasePhoto", "Cases", FormMethod.Post, new { @id = "frmModal", @name = "frmModal", enctype = "multipart/form-data" }))
+			{
+				<div class="modal-header">
+					<h5 class="modal-title" id="createCouponModalLabel">Create Coupon</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form id="formCreateCoupon">
+						<div class="row">
+							<div class="col-4">
+								<label class="control-label pt-2" style="font-size:20px;">Coupon Code</label>
+							</div>
+							<div class="col-8 pb-3">
+								<input asp-for="@Model.CouponCode" class="form-control" />
+								<span asp-validation-for="@Model.CouponCode" class="text-danger"></span>
+							</div>
+							<div class="col-4">
+								<label class="control-label pt-2" style="font-size:20px;">Discount Amount</label>
+							</div>
+							<div class="col-8 pb-3">
+								<input asp-for="DiscountAmount" class="form-control" />
+								<span asp-validation-for="DiscountAmount" class="text-danger"></span>
+							</div>
+							<div class="col-4">
+								<label class="control-label pt-2" style="font-size:20px;">Min Amount</label>
+							</div>
+							<div class="col-8 pb-3">
+								<input asp-for="MinAmount" class="form-control" />
+								<span asp-validation-for="MinAmount" class="text-danger"></span>
+							</div>
+
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" value="Create" class="btn btn-primary">Create</button>
+				</div>
+			}
+			</div>
+		</div>
+	</div>
