@@ -7,7 +7,7 @@ namespace Mango.Services.AuthAPI.Controllers
 {
 	[ApiController]
 	[Route("api/auth")]
-	public class AuthAPIController : ControllerBase
+    public class AuthAPIController : ControllerBase
 	{
 		public readonly IAuthService _authService;
 		public ResponseDto _responseDto;
@@ -17,7 +17,7 @@ namespace Mango.Services.AuthAPI.Controllers
 			_responseDto = new ResponseDto();
 		}
 
-		[HttpPost("register")]
+		[HttpPost("Register")]
 		public async Task<IActionResult> Register([FromBody] RegisterationRequestDto registerationRequestDto)
 		{
 			var errorMessage = await _authService.Register(registerationRequestDto);

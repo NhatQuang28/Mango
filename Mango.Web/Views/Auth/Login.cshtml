@@ -1,0 +1,40 @@
+﻿@model LoginRequestDto
+<div id="login-section" class="container mt-5">
+	<form method="post">
+		<div class="justify-content-center border border-primary align-items-center rounded">
+			<div class="row text-center">
+				<h1 class="text-primary pt-5">Login</h1>
+				<h4>Welcome Back!</h4>
+			</div>
+			@*<div class="row text-center pb-3">
+				<div asp-validation-summary="All" class="text-danger"></div>
+			</div> *@
+			<div class="row">
+				<div class="col-6 offset-md-3 pb-2">
+					<input asp-for="Email" class="form-control" placeholder="Email..." />
+					<span asp-validation-for="Email" class="text-danger"/>
+				</div>
+				<div class="col-6 offset-md-3 pb-2">
+					<input asp-for="Password" class="form-control" placeholder="Password..." />
+					<span asp-validation-for="Password" class="text-danger" />
+				</div>
+				<div class="col-6 offset-md-3 pb-2">
+					<input type="checkbox" class="me-1"/><label>Remember me</label>
+				</div>
+				<div class="col-6 offset-md-3 pb-5 pt-3">
+					<button type="submit" class="form-control btn btn-success" value="Submit">Login</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<style>
+	#login-section{
+		/* background-image: url("../img/mango-bg.png"); */
+	}
+</style>
+
+@section Scripts{
+	<partial name="_ValidationScriptsPartial.cshtml" />
+}
